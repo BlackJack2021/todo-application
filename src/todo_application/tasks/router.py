@@ -1,12 +1,13 @@
-from fastapi import APIRouter, HTTPException
-
-from typing import Optional, List
-from .schemas import Status, TaskCreate, TaskUpdate, Task
-from ..db_mock.db import tasks
 import uuid
-from uuid import UUID
 from datetime import datetime
+from typing import List, Optional
+from uuid import UUID
+
+from fastapi import APIRouter, HTTPException
 from starlette import status
+
+from ..db_mock.db import tasks
+from .schemas import Status, Task, TaskCreate, TaskUpdate
 
 router = APIRouter()
 

@@ -1,6 +1,7 @@
-from typing import TypedDict, Optional, List, Literal
-from uuid import UUID
 from datetime import datetime
+from typing import List, Literal, Optional, TypedDict
+from uuid import UUID
+
 
 class User(TypedDict):
     user_id: UUID
