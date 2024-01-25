@@ -13,8 +13,8 @@
 
   - `user_id` : ユーザーを識別する一意の ID
   - `name` : ユーザーの指定した名前
-  - `createdAt`: ユーザーが作成された日時
-  - `updatedAt`: ユーザー情報が更新された日時
+  - `created_at`: ユーザーが作成された日時
+  - `updated_at`: ユーザー情報が更新された日時
 
 - タスク
   - `task_id`: タスクを識別する一意の ID
@@ -25,8 +25,8 @@
     - 進行中 : `progress`
     - 完了 : `done`
   - `user_id`: ユーザーを識別する一意の ID
-  - `createdAt`: タスクが作成された日時
-  - `updatedAt`: タスクが更新された日時
+  - `created_at`: タスクが作成された日時
+  - `updated_at`: タスクが更新された日時
 
 これらの情報に基づいて、REST API を構築してみましょう。
 
