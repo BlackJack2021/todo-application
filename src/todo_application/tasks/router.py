@@ -49,15 +49,13 @@ async def create_task(
     task_id = uuid.uuid4()
     created_at = datetime.today()
     updated_at = datetime.today()
-    new_task = {
-        'title': request_body.title,
-        'description': request_body.description,
-        'status': request_body.status.value,
-        'user_id': request_body.user_id,
-        'task_id': task_id,
-        'created_at': created_at,
-        'updated_at': updated_at
+    new_task: Task = {
+        **request_body.model_dump(),
+        "task_id": task_id,
+        "created_at": created_at,
+        "updated_at": updated_at
     }
+    
     tasks.append(new_task)
     return new_task
     

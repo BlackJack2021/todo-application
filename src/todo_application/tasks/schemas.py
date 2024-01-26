@@ -7,9 +7,9 @@ from pydantic import BaseModel
 
 
 class Status(Enum):
-    not_started = 'not_started'
-    progress = 'progress'
-    done = 'done'
+    NOT_STARTED = 'not_started'
+    PROGRESS = 'progress'
+    DONE = 'done'
 
 class TaskCreate(BaseModel):
     '''POST /tasks のリクエストボディが満たすべきスキーマ'''

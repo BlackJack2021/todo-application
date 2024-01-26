@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import List, Literal, Optional, TypedDict
 from uuid import UUID
 import uuid
+from ..tasks.schemas import Status as TaskStatus
 
 class User(TypedDict):
     user_id: UUID
@@ -35,7 +36,7 @@ class Task(TypedDict):
     task_id: UUID
     title: str
     description: Optional[str]
-    status: Literal['not_started', 'progress', 'done']
+    status: TaskStatus
     user_id: UUID
     created_at: datetime
     updated_at: datetime
@@ -46,7 +47,7 @@ tasks: List[Task] = [
         "task_id": task1_id, 
         "title": "宿題", 
         "description": "漢字のノートを書く", 
-        "status": "not_started", 
+        "status": TaskStatus.NOT_STARTED,
         "user_id": user1_id, 
         "created_at": datetime(year=2023, month=1, day=2), 
         "updated_at": datetime(year=2023, month=1, day=4)
@@ -55,7 +56,7 @@ tasks: List[Task] = [
         "task_id": task2_id, 
         "title": "買い物", 
         "description": "りんごを2つ買う", 
-        "status": "progress", 
+        "status": TaskStatus.PROGRESS, 
         "user_id": user2_id, 
         "created_at": datetime(year=2023, month=2, day=4), 
         "updated_at": datetime(year=2023, month=2, day=8)
