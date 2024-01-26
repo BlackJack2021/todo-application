@@ -46,7 +46,7 @@ async def create_task(
     request_body: TaskCreate
 ) -> Task:
     '''タスクを追加する'''
-    task_id = str(uuid.uuid4())
+    task_id = uuid.uuid4()
     created_at = datetime.today()
     updated_at = datetime.today()
     new_task = {
@@ -67,7 +67,7 @@ async def get_task(
 ) -> Task:
     '''指定されたタスクを取得する'''
     for task in tasks:
-        if task['task_id'] == str(task_id):
+        if task['task_id'] == task_id:
             return task
     raise HTTPException(
         status_code=404,
@@ -83,7 +83,7 @@ async def update_task(
     '''指定されたタスクを更新する'''
     request_body_dict = request_body.model_dump()
     for task in tasks:
-        if task['task_id'] == str(task_id):
+        if task['task_id'] == task_id:
             task.update(request_body_dict)
             task['updated_at'] = datetime.today()
             return task
@@ -98,7 +98,7 @@ async def delete_task(
 ):
     '''指定されたタスクを削除する'''
     for index, task in enumerate(tasks):
-        if task['task_id'] == str(task_id):
+        if task['task_id'] == task_id:
             tasks.pop(index)
             return
     raise HTTPException(
