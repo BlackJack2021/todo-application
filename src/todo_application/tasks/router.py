@@ -33,7 +33,7 @@ async def get_tasks(
     
     # status に条件があればフィルタリング
     if status is not None:
-        _tasks = [_task for _task in _tasks if _task['status'] == status.value]
+        _tasks = [_task for _task in _tasks if _task['status'] == status]
     
     # limit が指定されていればその数に限定
     if limit is not None:
@@ -47,8 +47,8 @@ async def create_task(
 ) -> Task:
     '''タスクを追加する'''
     task_id = uuid.uuid4()
-    created_at = datetime.today()
-    updated_at = datetime.today()
+    created_at = datetime.now()
+    updated_at = datetime.now()
     new_task: Task = {
         **request_body.model_dump(),
         "task_id": task_id,
@@ -83,7 +83,7 @@ async def update_task(
     for task in tasks:
         if task['task_id'] == task_id:
             task.update(request_body_dict)
-            task['updated_at'] = datetime.today()
+            task['updated_at'] = datetime.now()
             return task
     raise HTTPException(
         status_code=404,
