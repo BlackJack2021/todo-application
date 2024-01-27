@@ -2,8 +2,8 @@ from fastapi import APIRouter, HTTPException
 from typing import Optional, List
 from starlette import status
 
-from .schemas import User, UserCreate, UserUpdate
-from ..db_mock.db import users
+from .schemas import User, UserCreate, UserUpdate, UserTasks
+from ..db_mock.db import users, tasks
 import uuid
 from uuid import UUID
 from datetime import datetime
@@ -88,6 +88,22 @@ async def delete_user(
         if user['user_id'] == user_id:
             users.pop(index)
             return
+    raise HTTPException(
+        status_code=404,
+        detail=user_not_found_message(user_id)
+    )
+
+@router.get('/users/{user_id}/tasks')
+async def get_user_tasks(user_id: UUID) -> UserTasks:
+    '''指定されたユーザー情報、及びそのユーザーのタスクの一覧を取得'''
+    for user in users:
+        if user['user_id'] == user_id:
+            tasks_of_user = [task for task in tasks if task['user_id'] == user_id]
+            user_tasks = {
+                **user,
+                "tasks": tasks_of_user
+            }
+            return user_tasks
     raise HTTPException(
         status_code=404,
         detail=user_not_found_message(user_id)
